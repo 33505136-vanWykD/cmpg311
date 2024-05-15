@@ -9,8 +9,24 @@ select 'North' as Division_name from dual
 union select 'East' as Division_name from dual
 union select 'South' as Division_name from dual
 union select 'West' as Division_name from dual
+;
+select * from division;
 
-select * from division 
+--------------------------
+----DONOR_DEFERRAL_STATUS-
+--------------------------
+insert into DONOR_DEFERRAL_STATUS 
+(
+	DONOR_DEFERRAL_STS_NAME
+)
+select 'No Deferral' as name from dual
+union select 'Deferred' as name from dual
+union select 'Deferred Test Result' as name from dual
+union select 'Temporarily Deferred  - Risky Behaviour' as name from dual
+union select 'Temporarily Deferred  - Pending Test Results' as name from dual
+;
+select * from DONOR_DEFERRAL_STATUS;
+
 
 --------------------------
 ----CENTER----------------
@@ -89,7 +105,7 @@ union select 'Female' as donor_gender_name from dual
 union select 'Other' as donor_gender_name from dual;
 
 select *
-from donor_gender
+from donor_gender;
 
 --------------------------
 ----DONOR_BLOOD_TYPE------
@@ -110,7 +126,7 @@ union select 'Rh+' as name from dual
 union select 'Rh-' as name from dual
 union select 'Rh-Null' as name from dual;
 
-select * from donor_blood_type
+select * from donor_blood_type;
 
 
 
@@ -332,7 +348,7 @@ union select 'Jessica' as name, 'Hope' as mname, 'Woods' as lname, 'Jessica Hope
 union select 'Susan' as name, 'Gabrielle' as mname, 'Wallace' as lname, 'Susan Gabrielle Wallace' as fname, '218219 Oak Lane Thabazimbi' as addr, '149658962' as cell, 'Susan@careerjunction.co.za' as email, '9876543210986' as id,  dg.donor_gender_id, bt.donor_blood_type_id , de.Deferral_Status_ID from donor_gender dg, donor_blood_type bt, donor_deferral_status de where dg.donor_gender_name like 'Female'and bt.donor_blood_type_name like 'B+'and de.Donor_Deferral_Sts_Name like 'No Deferral'
 union select 'Phillip' as name, 'George' as mname, 'Simmons' as lname, 'Phillip George Simmons' as fname, '190191 Elm Road Bethal' as addr, '174399154' as cell, 'Phillip@bmr.co.za' as email, '9876543210987' as id,  dg.donor_gender_id, bt.donor_blood_type_id , de.Deferral_Status_ID from donor_gender dg, donor_blood_type bt, donor_deferral_status de where dg.donor_gender_name like 'Male'and bt.donor_blood_type_name like 'B+'and de.Donor_Deferral_Sts_Name like 'No Deferral'
 ;
-select * from donor
+select * from donor;
 
 
 
@@ -444,7 +460,7 @@ union select 'BBCC45678' as uc from dual
 union select 'BBCC98765' as uc from dual
 union select 'BBCC45678' as uc from dual
 ;
-select * from unit_case
+select * from unit_case;
 
 
 --------------------------
@@ -464,7 +480,7 @@ union select 'Fresh Frozen Plasma (FFP)' as li from dual
 union select 'Anti-D' as li from dual
 union select 'Cryoprecipitate' as li from dual
 ;
-select * from unit_line_item
+select * from unit_line_item;
 
 --------------------------
 ----UNIT_TYPE-------------
@@ -476,7 +492,7 @@ insert into unit_type
 select 'Plasma' as ut from dual
 union select 'Whole Blood' as ut from dual
 ;
-select * from UNIT_TYPE
+select * from UNIT_TYPE;
 
 --------------------------
 ----LOCATION-------------
@@ -490,7 +506,7 @@ union select 'Warehouse' as l from dual
 union select 'Customer' as l from dual
 union select 'Donation Center' as l from dual
 ;
-select * from LOCATION
+select * from LOCATION;
 
 
 --------------------------
@@ -630,7 +646,7 @@ union select 'Andrew' as nm, 'King' as lastn, 'Andrew King' as fn from dual
 union select 'James' as nm, 'Brown' as lastn, 'James Brown' as fn from dual
 union select 'Mark' as nm, 'Johnson' as lastn, 'Mark Johnson' as fn from dual
 ;
-select * from staff
+select * from staff;
 
 Update STAFF
 set 
@@ -640,7 +656,7 @@ where
 and 
 	staff_name_full not like 'Unknown'
 ;   
-select * from staff
+select * from staff;
  
 update STAFF set staff_center_manager_id = (select staff_id from staff where staff_name_full = 'Jon Snow'),  staff_head_pathologist_id = (select staff_id from staff where staff_name_full = 'Unknown') where staff_name_full like 'Jon Snow';
 update STAFF set staff_center_manager_id = (select staff_id from staff where staff_name_full = 'Daenerys Targaryen'),  staff_head_pathologist_id = (select staff_id from staff where staff_name_full = 'Unknown') where staff_name_full like 'Daenerys Targaryen';
@@ -770,7 +786,7 @@ update STAFF set staff_center_manager_id = (select staff_id from staff where sta
 update STAFF set staff_center_manager_id = (select staff_id from staff where staff_name_full = 'Sharon Johnson'),  staff_head_pathologist_id = (select staff_id from staff where staff_name_full = 'Count Dracula') where staff_name_full like 'James Brown';
 update STAFF set staff_center_manager_id = (select staff_id from staff where staff_name_full = 'Sharon Johnson'),  staff_head_pathologist_id = (select staff_id from staff where staff_name_full = 'Count Dracula') where staff_name_full like 'Mark Johnson';
 
-select * from staff
+select * from staff;
 
 
 
@@ -981,7 +997,7 @@ union select 'UCN2024182' as ucn, to_date('2023-06-15', 'YYYY-MM-DD') as ddu, 90
 union select 'UCN2024183' as ucn, to_date('2023-06-16', 'YYYY-MM-DD') as ddu, 980 as voli, 990 as volc, 950 as volt, 784 as gram, 1 as flagt, 0 as flags, 0 as flagr, d.donor_id, c.center_id, ut.unit_type_id, uli.unit_line_item_id, uc.unit_case_id, l.location_id, s.staff_id from donor d, center c, unit_type ut, unit_case uc, location l, unit_line_item uli, staff s  where donor_rsa_identity_number like '9205814730652' and c.center_name like 'Ermelo' and unit_type_name like 'Whole Blood' and  unit_line_item_name like 'Whole Blood' and unit_case_number like 'BBCC54329' and location_name like 'Donation Center' and staff_name_full like 'Wednesday Addams'
 ;
 
-select * from unit
+select * from unit;
 
 
 --------------------------
@@ -1216,7 +1232,7 @@ union select 'UCN2024104-2' as usn, unit_id from unit where unit_control_number 
 union select 'UCN2024105-2' as usn, unit_id from unit where unit_control_number = 'UCN2024105'
 union select 'UCN2024106-2' as usn, unit_id from unit where unit_control_number = 'UCN2024106'
 ;
-select * from sample
+select * from sample;
 
 
 --------------------------
@@ -2168,4 +2184,4 @@ union select sample_id, test_id, test_result_id, to_date('2023-05-16', 'YYYY-MM-
 union select sample_id, test_id, test_result_id, to_date('2023-05-17', 'YYYY-MM-DD') as dt, to_date('2023-05-17', 'YYYY-MM-DD') as dt, to_date('2023-05-19', 'YYYY-MM-DD') as dr, sl.staff_id, lm.staff_id from sample s, test t, test_result tr, staff sl, staff lm where  s.sample_control_number like 'UCN2024x7-1' and t.test_name like 'CMV IgM' and test_result_name = 'Negative' and sl.staff_name_full = 'Donald Collins' and lm.staff_name_full = 'James Brown' 
 union select sample_id, test_id, test_result_id, to_date('2023-05-18', 'YYYY-MM-DD') as dt, to_date('2023-05-18', 'YYYY-MM-DD') as dt, to_date('2023-05-20', 'YYYY-MM-DD') as dr, sl.staff_id, lm.staff_id from sample s, test t, test_result tr, staff sl, staff lm where  s.sample_control_number like 'UCN2024x8-1' and t.test_name like 'Parvo' and test_result_name = 'Negative' and sl.staff_name_full = 'Donald Collins' and lm.staff_name_full = 'James Brown' 
 ;
-select * from SAMPLE_TEST_RESULT
+select * from SAMPLE_TEST_RESULT;
